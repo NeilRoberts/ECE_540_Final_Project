@@ -1,0 +1,13 @@
+
+ECE 540: Final Project Sync
+11-14-2015
+
+Display size: 1024x1024
+
+Need to know:
+- examine COE conversion script to merge headers with our image data (Chad)
+- expand proj2 display to 1024x1024 and draw map in the lower right corner (Binata)
+- examine bot source and define long range sensor register (Chad)
+- Top-level module and bot interface changes (Brian)
+- Brian and Binata to divide Verilog work
+- Bot assembly (Neil & Chad)
