@@ -10,9 +10,11 @@ my $hdr_imgdata_loc	= 0x0A;			# Header location for image data offset
 
 # Pixel color constants
 my $BLACK_PIXEL		= 0x000000;
-my $BLACK_COE		= "0";
+my $BLACK_COE		= "8";
 my $RED_PIXEL		= 0x0000FF;		# BMP stores image data in little-endian format (BGR)
 my $RED_COE			= "9";
+my $GREEN_PIXEL		= 0x00FF00;
+my $GREEN_COE		= "A";
 my $WHITE_PIXEL		= 0xFFFFFF;
 my $WHITE_COE		= "F";
 
@@ -44,6 +46,7 @@ while (read($in_fh, $pixel, 3) != 0) {
 	printf("Pixel data: %06X\t", $pixel);
 	if ($pixel == $WHITE_PIXEL) { print $out_fh "\n${WHITE_COE}"; printf("COE: %06X\n", $WHITE_COE); }
 	elsif ($pixel == $RED_PIXEL) { print $out_fh "\n${RED_COE}"; printf("COE: %06X\n", $RED_COE); }
+	elsif ($pixel == $GREEN_PIXEL) { print $out_fh "\n${GREEN_COE}"; printf("COE: %06X\n", $GREEN_COE); }
 	elsif ($pixel == $BLACK_PIXEL) { print $out_fh "\n${BLACK_COE}"; printf("COE: %06X\n", $BLACK_COE); }
 	else { print "Unrecognized color: ${pixel}\n" }
 	printf("Cursor: %04X\t", tell($in_fh));
