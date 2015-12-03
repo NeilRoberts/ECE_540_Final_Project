@@ -8,6 +8,14 @@ my $out_file		= "icon.coe";
 
 my $hdr_imgdata_loc	= 0x0A;			# Header location for image data offset
 
+# Pixel color constants
+my $BLACK_PIXEL		= 0x000000;
+my $BLACK_COE		= "0";
+my $RED_PIXEL		= 0x0000FF;		# BMP stores image data in little-endian format (BGR)
+my $RED_COE			= "9";
+my $WHITE_PIXEL		= 0xFFFFFF;
+my $WHITE_COE		= "F";
+
 # Open the input file in binary mode
 open(my $in_fh, "<", $in_file) or die "*** ERROR: can't open ${in_file}";
 binmode $in_fh;
@@ -33,10 +41,11 @@ my $pixel;
 printf("Cursor: %04X\t", tell($in_fh));
 while (read($in_fh, $pixel, 3) != 0) {
 	$pixel = hex(unpack('H*', $pixel));
-	printf("Pixel data: %06X\n", $pixel);
-	if ($pixel == 0xFFFFFF) { print $out_fh "\nF"; }
-	elsif ($pixel == 0x241CED) { print $out_fh "\n9"; }
-	elsif ($pixel == 0x000000) { print $out_fh "\n0"; }
+	printf("Pixel data: %06X\t", $pixel);
+	if ($pixel == $WHITE_PIXEL) { print $out_fh "\n${WHITE_COE}"; printf("COE: %06X\n", $WHITE_COE); }
+	elsif ($pixel == $RED_PIXEL) { print $out_fh "\n${RED_COE}"; printf("COE: %06X\n", $RED_COE); }
+	elsif ($pixel == $BLACK_PIXEL) { print $out_fh "\n${BLACK_COE}"; printf("COE: %06X\n", $BLACK_COE); }
+	else { print "Unrecognized color: ${pixel}\n" }
 	printf("Cursor: %04X\t", tell($in_fh));
 }
 print $out_fh ";";
