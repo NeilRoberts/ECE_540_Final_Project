@@ -44,10 +44,10 @@ printf("Cursor: %04X\t", tell($in_fh));
 while (read($in_fh, $pixel, 3) != 0) {
 	$pixel = hex(unpack('H*', $pixel));
 	printf("Pixel data: %06X\t", $pixel);
-	if ($pixel == $WHITE_PIXEL) { print $out_fh "\n${WHITE_COE}"; printf("COE: %06X\n", $WHITE_COE); }
-	elsif ($pixel == $RED_PIXEL) { print $out_fh "\n${RED_COE}"; printf("COE: %06X\n", $RED_COE); }
-	elsif ($pixel == $GREEN_PIXEL) { print $out_fh "\n${GREEN_COE}"; printf("COE: %06X\n", $GREEN_COE); }
-	elsif ($pixel == $BLACK_PIXEL) { print $out_fh "\n${BLACK_COE}"; printf("COE: %06X\n", $BLACK_COE); }
+	if ($pixel == $WHITE_PIXEL) { print $out_fh "\n${WHITE_COE}"; printf("COE: %s\n", $WHITE_COE); }
+	elsif ($pixel == $RED_PIXEL) { print $out_fh "\n${RED_COE}"; printf("COE: %s\n", $RED_COE); }
+	elsif ($pixel == $GREEN_PIXEL) { print $out_fh "\n${GREEN_COE}"; printf("COE: %s\n", $GREEN_COE); }
+	elsif ($pixel == $BLACK_PIXEL) { print $out_fh "\n${BLACK_COE}"; printf("COE: %s\n", $BLACK_COE); }
 	else { print "Unrecognized color: ${pixel}\n" }
 	printf("Cursor: %04X\t", tell($in_fh));
 }
